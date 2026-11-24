@@ -3,3 +3,4 @@
 *.json
 raw/
 __pycache__/
+proposals/

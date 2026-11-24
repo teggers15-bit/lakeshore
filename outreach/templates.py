@@ -22,6 +22,7 @@ MAILING_ADDRESS = "[MAILING ADDRESS NEEDED]"
 
 GROUPS = {
     "trades": {
+        "proof": "Overstreet & Associates Engineering in Biloxi and Wilco Land Management",
         "match": ["contractor", "roof", "plumb", "hvac", "air condition", "heating",
                   "landscap", "lawn", "pressure wash", "power wash", "clean",
                   "tow", "auto repair", "mechanic", "tire", "detail", "car wash",
@@ -29,18 +30,18 @@ GROUPS = {
                   "pest", "pool", "glass", "transmission", "oil change", "auto"],
         "noun": "company",
         "look_for": "photos of past work, reviews, and an easy way to get a quote",
-        "ai": "an AI assistant that answers your calls and texts while you're on a job, "
-              "gets the details, and books the estimate for you",
+        "ai": "an AI assistant that answers your calls and texts while you're on a job and books the estimate",
     },
     "appointments": {
+        "proof": "Fitness Depot (we built their AI customer response system) and Overstreet & Associates Engineering in Biloxi",
         "match": ["salon", "barber", "nail", "spa", "massage", "groom", "tattoo",
                   "pierc", "lash", "brow", "wax", "beauty", "hair", "esthetic"],
         "noun": "shop",
         "look_for": "your services, prices, and how to book",
-        "ai": "an AI assistant that books appointments by text or phone around the clock, "
-              "even when your hands are full with a client",
+        "ai": "an AI assistant that books appointments by text or phone 24/7, even when your hands are full",
     },
     "food": {
+        "proof": "Rescued Child Clothing and Fitness Depot (we built their AI customer response system)",
         "match": ["restaurant", "bakery", "cafe", "coffee", "grill", "bar", "food",
                   "pizza", "seafood", "bbq", "barbecue", "diner", "kitchen", "donut",
                   "taco", "mexican", "chinese", "sushi", "catering", "deli", "dessert",
@@ -48,23 +49,22 @@ GROUPS = {
                   "vietnamese", "japanese", "italian", "american"],
         "noun": "place",
         "look_for": "your menu, hours, and photos of the food",
-        "ai": "an AI assistant that answers the phone for hours, menu questions, and "
-              "catering or big-order requests so your staff can focus on the people in front of them",
+        "ai": "an AI assistant that answers the phone for hours, menu questions, and catering orders",
     },
     "retail": {
+        "proof": "Rescued Child Clothing and Fitness Depot (we built their AI customer response system)",
         "match": ["boutique", "store", "shop", "clothing", "gift", "jewel", "florist"],
         "noun": "shop",
         "look_for": "what you carry, your hours, and what's new",
-        "ai": "an AI assistant that answers questions about hours, stock, and new arrivals "
-              "by text or chat, day or night",
+        "ai": "an AI assistant that answers questions about hours, stock, and new arrivals by text, day or night",
     },
 }
 
 DEFAULT_GROUP = {
+    "proof": "Overstreet & Associates Engineering in Biloxi and Fitness Depot (we built their AI customer response system)",
     "noun": "business",
     "look_for": "what you offer, your hours, and how to reach you",
-    "ai": "an AI assistant that answers calls and texts after hours, handles the common "
-          "questions, and books appointments for you",
+    "ai": "an AI assistant that answers calls and texts after hours and books appointments for you",
 }
 
 
@@ -136,9 +136,10 @@ def signature() -> str:
 OFFER = ("Would it help if I put together a free homepage mockup for {name}? "
          "No cost and no obligation. If you like it, we can talk from there.")
 
-WHO = "I'm Tyler with Red Ocean. We build websites for small businesses here on the Coast. We can also set up {ai}."
-WHO_REBUILD = ("I'm Tyler with Red Ocean. We rebuild websites for small businesses here on the Coast "
-               "so they look sharp on a phone and are easy to find on Google. We can also set up {ai}.")
+WHO = ("I'm Tyler with Red Ocean, here on the Coast. We do websites, AI tools, and Facebook and Google "
+       "ads for small businesses like {proof}. For you, that could include {ai}.")
+WHO_REBUILD = ("I'm Tyler with Red Ocean, here on the Coast. We do fast, mobile-friendly websites, AI tools, "
+               "and Facebook and Google ads for small businesses like {proof}. For you, that could include {ai}.")
 
 
 def clean_name(raw: str) -> str:
@@ -173,7 +174,7 @@ def render(lead: dict) -> tuple[str, str]:
             f"{g['look_for']} before they call. If there isn't one, many just call the next "
             f"{g['noun']} on the list."
         )
-        who = WHO.format(ai=g["ai"])
+        who = WHO.format(ai=g["ai"], proof=g["proof"], noun=g["noun"])
     elif angle == "SOCIAL":
         subject = f"{name} on Google"
         platform = lead.get("platform", "Facebook")
@@ -190,21 +191,21 @@ def render(lead: dict) -> tuple[str, str]:
                 f"That's a good start, but when someone in {city} searches \"{search} near me,\" "
                 f"a real website with {g['look_for']} is what turns a lot of those searches into calls."
             )
-        who = WHO.format(ai=g["ai"])
+        who = WHO.format(ai=g["ai"], proof=g["proof"], noun=g["noun"])
     elif angle == "DEAD":
         subject = f"{possessive(name)} website link"
         middle = (
             f"{lead['observation']} So anyone who taps it right now hits a dead end, "
             f"and a lot of them will just call the next {g['noun']} on the list."
         )
-        who = WHO.format(ai=g["ai"])
+        who = WHO.format(ai=g["ai"], proof=g["proof"], noun=g["noun"])
     elif angle == "OUTDATED":
         subject = f"quick idea for {possessive(name)} website"
         opener = f"I came across {name} on Google Maps and pulled up your website."
         middle = lead["observation"]
         if "rates as poor" in middle and "back out" not in middle:
             middle += " Slow sites lose a lot of visitors before the page even finishes loading."
-        who = WHO_REBUILD.format(ai=g["ai"])
+        who = WHO_REBUILD.format(ai=g["ai"], proof=g["proof"], noun=g["noun"])
     else:
         raise ValueError(f"unknown angle {angle!r}")
 

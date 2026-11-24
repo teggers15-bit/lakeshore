@@ -40,3 +40,14 @@ Plain text, no links, sent individually (never BCC), with an opt-out line and po
 4. Day 4 to 5 after each batch: one follow-up reply (`render_followup`) to anyone who hasn't
    answered. Never email again anyone who says no or doesn't reply to the follow-up.
 5. Log each send in the `sent_at` column of the Drive sheet.
+
+## Update: client proof, ads, proposals
+- Each email names two past clients matched to the prospect's industry:
+  - trades and contractors: Overstreet & Associates Engineering (Biloxi) + Wilco Land Management
+  - salons, barbers, spas: Fitness Depot (AI customer response system) + Overstreet & Associates
+  - food and retail: Rescued Child Clothing + Fitness Depot
+- Every email now says we also run Facebook and Google ads.
+- `proposal.py "<Business Name>"` writes a 3-option proposal (Website / + AI / + AI + Ads)
+  to `proposals/`, using the same problem we pointed out in that business's email.
+  Website pricing comes from the Continental Genetics proposal ($1,545 + $20/mo).
+  AI and ads prices are left in [brackets] for Tyler to set.
