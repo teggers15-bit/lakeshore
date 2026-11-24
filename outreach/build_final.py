@@ -99,8 +99,9 @@ def first_touch(lead, fact_kind, data):
     else:
         raise ValueError(fact_kind)
 
-    mock = (f"If it would help, I'll make you a free mockup: one image of a new {name} homepage laid out for "
-            f"phones, {MOCKUP[gk]}. It's yours to keep either way.")
+    what = f"a new homepage for {name}, laid out for phones," if name.startswith("The ") else f"a new {name} homepage laid out for phones,"
+    mock = (f"If it would help, I'll make you a free mockup: one image of {what} "
+            f"{MOCKUP[gk]}. It's yours to keep either way.")
     body = (f"Hi,\n\n{fact}\n\n{WHO}\n\n{mock}\n\nWant me to put it together? Just reply \"yes.\"\n\n"
             f"{SIG}\n\n{PS}\n\n{ADDRESS}")
     return subject, body
