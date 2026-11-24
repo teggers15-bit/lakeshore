@@ -17,8 +17,8 @@ PAGE = "#F1F4F8"
 REPLY_TO = "teggers15@gmail.com"
 SANS = "Helvetica,Arial,sans-serif"
 BRAND = "Jost,Helvetica,Arial,sans-serif"
-CLIENTS = ["White's Crossing Cattle", "WillCo Land", "Overstreet & Associates Engineering",
-           "Fitness Depot", "Rescued Child Clothing Co."]
+CLIENTS = ["White's Crossing Cattle", "WillCo Land", "Fitness Depot", "Rescued Child Clothing Co.",
+           "whatiswaterbook.com"]
 
 
 def _q(s: str) -> str:

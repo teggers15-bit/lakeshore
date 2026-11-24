@@ -23,7 +23,7 @@ WEBSITE = "goredocean.com"
 
 GROUPS = {
     "trades": {
-        "proof": "Overstreet & Associates Engineering in Biloxi and WillCo Land",
+        "proof": "WillCo Land and White's Crossing Cattle",
         "match": ["contractor", "roof", "plumb", "hvac", "air condition", "heating",
                   "landscap", "lawn", "pressure wash", "power wash", "clean",
                   "tow", "auto repair", "mechanic", "tire", "detail", "car wash",
@@ -34,7 +34,7 @@ GROUPS = {
         "ai": "an AI assistant that answers your calls and texts while you're on a job and books the estimate",
     },
     "appointments": {
-        "proof": "Fitness Depot (we built their AI customer response system) and Overstreet & Associates Engineering in Biloxi",
+        "proof": "Fitness Depot (we built their AI customer response system) and whatiswaterbook.com",
         "match": ["salon", "barber", "nail", "spa", "massage", "groom", "tattoo",
                   "pierc", "lash", "brow", "wax", "beauty", "hair", "esthetic"],
         "noun": "shop",
@@ -62,7 +62,7 @@ GROUPS = {
 }
 
 DEFAULT_GROUP = {
-    "proof": "Overstreet & Associates Engineering in Biloxi and Fitness Depot (we built their AI customer response system)",
+    "proof": "White's Crossing Cattle and Fitness Depot (we built their AI customer response system)",
     "noun": "business",
     "look_for": "what you offer, your hours, and how to reach you",
     "ai": "an AI assistant that answers calls and texts after hours and books appointments for you",

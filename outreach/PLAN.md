@@ -43,9 +43,10 @@ Plain text, no links, sent individually (never BCC), with an opt-out line and po
 
 ## Update: client proof, ads, proposals
 - Each email names two past clients matched to the prospect's industry:
-  - trades and contractors: Overstreet & Associates Engineering (Biloxi) + Wilco Land Management
-  - salons, barbers, spas: Fitness Depot (AI customer response system) + Overstreet & Associates
-  - food and retail: Rescued Child Clothing + Fitness Depot
+  - trades and contractors: WillCo Land + White's Crossing Cattle
+  - salons, barbers, spas: Fitness Depot (AI customer response system) + whatiswaterbook.com
+  - food and retail: Rescued Child Clothing Co. + Fitness Depot
+  - (Overstreet & Associates removed for now: deal in progress)
 - Every email now says we also run Facebook and Google ads.
 - `proposal.py "<Business Name>"` writes a 3-option proposal (Website / + AI / + AI + Ads)
   to `proposals/`, using the same problem we pointed out in that business's email.

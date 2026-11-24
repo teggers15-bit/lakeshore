@@ -94,7 +94,6 @@ and automatic backups. Monthly Plan: cancel anytime with 30 days' notice.
 ## Recent Work
 - **White's Crossing Cattle** (wxcattle.com): custom website
 - **WillCo Land LLC** (willcolandllc.com): custom website
-- **Overstreet & Associates Engineering** (Biloxi): website
 - **Fitness Depot** (gyms): AI customer response system and AI email assistant
 - **Rescued Child Clothing Co.** (rescuedchildclothing.com): online apparel store
 - **What Is Water?** (whatiswaterbook.com): book website with reader sign-ups
