@@ -157,66 +157,84 @@ def possessive(n: str) -> str:
     return n + ("'" if n.endswith("s") else "'s")
 
 
-def render(lead: dict) -> tuple[str, str]:
-    """Return (subject, body) for a lead dict with keys:
-    name, category, city, search, score, reviews, angle, observation (OUTDATED/DEAD only)."""
+def parts(lead: dict) -> dict:
+    """Every piece of one email, shared by the plain-text and HTML versions."""
     name = lead.get("display_name") or clean_name(lead["name"])
     g = group_for(lead.get("category", ""))
     city = lead.get("city") or "the area"
     search = (lead.get("search") or lead.get("category") or "business").lower()
     opener = review_line(name, lead.get("score"), lead.get("reviews"))
     angle = lead["angle"]
+    p = dict(name=name, angle=angle, ai=g["ai"], proof=g["proof"], consequence="")
 
     if angle == "A":
-        subject = f"{name} on Google"
-        middle = (
-            f"I noticed there's no website on your listing, though. When someone in {city} "
-            f"searches \"{search} near me,\" a lot of them tap \"Website\" to check "
-            f"{g['look_for']} before they call. If there isn't one, many just call the next "
-            f"{g['noun']} on the list."
-        )
-        who = WHO.format(ai=g["ai"], proof=g["proof"], noun=g["noun"])
+        p["subject"] = f"{name} on Google"
+        p["fact"] = "I noticed there's no website on your listing, though."
+        p["fact_html"] = "There's no website linked on your Google listing."
+        p["consequence"] = (f"When someone in {city} searches \"{search} near me,\" a lot of them tap "
+                            f"\"Website\" to check {g['look_for']} before they call. If there isn't one, "
+                            f"many just call the next {g['noun']} on the list.")
+        p["badge"] = ("None", "", "Website on your listing", "#D93025")
     elif angle == "SOCIAL":
-        subject = f"{name} on Google"
+        p["subject"] = f"{name} on Google"
         platform = lead.get("platform", "Facebook")
+        p["fact"] = f"I noticed the \"Website\" button on your listing goes to your {platform} page."
+        p["fact_html"] = f"The \"Website\" button on your Google listing goes to your {platform} page."
         if "booking" in platform.lower():
-            middle = (
-                f"I noticed the \"Website\" button on your listing goes to your {platform} page. "
-                f"That's great for booking, but a real website with photos of your work, your reviews, "
-                f"and your story is what helps you show up when someone in {city} searches "
-                f"\"{search} near me\" and hasn't found you yet."
-            )
+            p["consequence"] = (f"That's great for booking, but a real website with photos of your work, your "
+                                f"reviews, and your story is what helps you show up when someone in {city} "
+                                f"searches \"{search} near me\" and hasn't found you yet.")
         else:
-            middle = (
-                f"I noticed the \"Website\" button on your listing goes to your {platform} page. "
-                f"That's a good start, but when someone in {city} searches \"{search} near me,\" "
-                f"a real website with {g['look_for']} is what turns a lot of those searches into calls."
-            )
-        who = WHO.format(ai=g["ai"], proof=g["proof"], noun=g["noun"])
+            p["consequence"] = (f"That's a good start, but when someone in {city} searches \"{search} near me,\" "
+                                f"a real website with {g['look_for']} is what turns a lot of those searches into calls.")
+        short = platform.replace(" booking", "")
+        p["badge"] = (short, "", "Where “Website” goes", "#E37400")
     elif angle == "DEAD":
-        subject = f"{possessive(name)} website link"
-        middle = (
-            f"{lead['observation']} So anyone who taps it right now hits a dead end, "
-            f"and a lot of them will just call the next {g['noun']} on the list."
-        )
-        who = WHO.format(ai=g["ai"], proof=g["proof"], noun=g["noun"])
+        p["subject"] = f"{possessive(name)} website link"
+        p["fact"] = p["fact_html"] = lead["observation"]
+        p["consequence"] = (f"So anyone who taps it right now hits a dead end, and a lot of them will just "
+                            f"call the next {g['noun']} on the list.")
+        p["badge"] = ("Offline", "", "Your website link", "#D93025")
     elif angle == "OUTDATED":
-        subject = f"quick idea for {possessive(name)} website"
+        p["subject"] = f"quick idea for {possessive(name)} website"
         opener = f"I came across {name} on Google Maps and pulled up your website."
-        middle = lead["observation"]
-        if "rates as poor" in middle and "back out" not in middle:
-            middle += " Slow sites lose a lot of visitors before the page even finishes loading."
-        who = WHO_REBUILD.format(ai=g["ai"], proof=g["proof"], noun=g["noun"])
+        fact = lead["observation"]
+        if "rates as poor" in fact and "back out" not in fact:
+            fact += " Slow sites lose a lot of visitors before the page even finishes loading."
+        p["fact"] = p["fact_html"] = fact
+        score, lcp = lead.get("psi_score"), lead.get("psi_lcp_s")
+        try:
+            score = float(score) if score not in ("", None) else None
+            lcp = float(lcp) if lcp not in ("", None) else None
+        except ValueError:
+            score = lcp = None
+        if score is not None and score < 50:
+            p["badge"] = (f"{int(score)}", "/100", "Google PageSpeed · mobile", "#D93025")
+        elif lcp and lcp >= 8:
+            p["badge"] = ("10+" if lcp >= 10 else f"{int(lcp)}", " sec", "Mobile load time", "#E37400")
+        else:
+            p["badge"] = ("⚠", "", "“Not secure” warning", "#D93025")
     else:
         raise ValueError(f"unknown angle {angle!r}")
 
-    offer = OFFER.format(name=name)
-    if angle == "OUTDATED":
-        offer = (f"Would you be open to a free mockup of a refreshed homepage for {name}? "
-                 f"No cost and no obligation.")
+    p["opener"] = opener
+    rebuild = angle == "OUTDATED"
+    p["who"] = (WHO_REBUILD if rebuild else WHO).format(ai=g["ai"], proof=g["proof"], noun=g["noun"])
+    p["who_html"] = ("I'm Tyler with Red Ocean, here on the Coast. We do "
+                     + ("fast, mobile-friendly websites" if rebuild else "websites")
+                     + f", AI tools, and Facebook and Instagram ads for small businesses. "
+                       f"For you, that could include {g['ai']}.")
+    p["offer"] = (f"Would you be open to a free mockup of a refreshed homepage for {name}? No cost and no obligation."
+                  if rebuild else OFFER.format(name=name))
+    return p
 
-    body = f"Hi there,\n\n{opener}\n\n{middle}\n\n{who}\n\n{offer}\n\n{signature()}"
-    return subject, body
+
+def render(lead: dict) -> tuple[str, str]:
+    """Plain-text version: (subject, body)."""
+    p = parts(lead)
+    middle = f"{p['fact']} {p['consequence']}".strip()
+    body = f"Hi there,\n\n{p['opener']}\n\n{middle}\n\n{p['who']}\n\n{p['offer']}\n\n{signature()}"
+    return p["subject"], body
 
 
 if __name__ == "__main__":

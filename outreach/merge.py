@@ -9,6 +9,7 @@ Outputs:        leads.csv          every business, with status + reason
 """
 import csv, json, re
 from templates import render, site_observation
+from email_html import render_html
 
 FREE = ("gmail.com", "yahoo.com", "hotmail.com", "outlook.com", "aol.com", "icloud.com",
         "live.com", "msn.com", "att.net", "bellsouth.net", "comcast.net", "me.com", "ymail.com",
@@ -178,8 +179,9 @@ for p in places:
         if rec["email"]:
             rec["status"] = "ready"
             subject, body = render({**rec, "score": p["score"], "reviews": p["reviews"]})
+            html = render_html({**rec, "score": p["score"], "reviews": p["reviews"]})
             queue.append(dict(placeId=p["placeId"], name=p["name"], to=rec["email"], subject=subject,
-                              body=body, angle=rec["angle"], email_confidence=rec["email_confidence"],
+                              body=body, html=html, angle=rec["angle"], email_confidence=rec["email_confidence"],
                               email_source=rec["email_source"], note=rec["reason"]))
         else:
             rec["status"], rec["reason"] = "call", (rec["reason"] or "no public email found")
