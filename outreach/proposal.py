@@ -7,13 +7,11 @@ import datetime, json, re, sys
 from pathlib import Path
 from templates import clean_name, group_for
 
-PRICES = {
-    "website_build": "$1,545",            # from the Continental Genetics proposal
-    "hosting": "$20/mo",
+PRICES = {   # website prices from goredocean.com/pricing and /start (Nov 24, 2026)
     "ai_setup": "[$ AI setup]",
     "ai_monthly": "[$ AI monthly]",
     "ads_mgmt": "[$ ads management / mo]",
-    "ads_budget": "[$ suggested ad budget / mo]",
+    "ads_budget": "[$ / mo]",
 }
 
 AI_SCOPE = {
@@ -34,7 +32,7 @@ AI_DEFAULT = ["Answers calls and texts after hours", "Answers your most common q
               "Books appointments and sends you a summary of every new lead"]
 
 TEMPLATE = """# RED OCEAN
-### Websites · AI · Ads
+### Websites · AI · Meta Ads · goredocean.com
 
 ## Proposal for {name}
 Prepared {date}
@@ -45,58 +43,77 @@ Below you'll find three options, from a new website on its own up to a full syst
 customers and answers them for you. Everything is built and managed by Red Ocean, so you can stay
 focused on running {name} while we handle the rest.
 
-## Option 1: Website
-- Custom, mobile-friendly design that looks sharp on phones, tablets, and desktops
-- Core pages: Home, About, Services, and Contact
-- Contact form, plus click-to-call and click-to-text buttons
-- Basic on-page SEO so people searching on the Coast can find you
-- Google Business Profile check-up: website link, hours, photos, and categories
-- Domain connection and full launch
+## Option 1: Custom Website
+- **Custom 5-page website**, designed around your work, not a template
+- **Your domain name**, registered in your name for $100 a year, or we connect the one you have
+- **Looks right on every phone**, where most of your customers will see it first
+- **Local SEO setup**, so nearby searches actually find you
+- **Contact form**: inquiries go straight to your phone and email
+- **Google Business Profile integration**: reviews and map listing tied in
+- **Hosting, SSL, and security**, handled so you never think about it
+- **Admin dashboard**: edit your own text and photos any time, free
 
 ## Option 2: Website + AI Assistant
 Everything in Option 1, plus an AI assistant on your phone line, website, and texts:
 {ai_scope}
 
-## Option 3: Website + AI Assistant + Local Ads
-Everything in Option 2, plus Facebook, Instagram, and Google ads aimed at customers in Biloxi,
-D'Iberville, Ocean Springs, and Gulfport:
-- Campaign setup, targeting, and ad creative (images and copy)
+## Option 3: Website + AI Assistant + Meta Ads
+Everything in Option 2, plus Facebook and Instagram ads aimed at customers in Biloxi, D'Iberville,
+Ocean Springs, and Gulfport:
+- Campaign setup, audience targeting, and ad creative (images and copy)
 - Ads send people to your new site, where the AI assistant answers and books them
-- Monthly report in plain English: what you spent, how many calls and leads it produced
+- A monthly report in plain English: what you spent, and how many calls and leads it produced
 
 ## Investment
 
+**Website: pick how you'd like to pay**
+
+| Plan | Due today | Monthly |
+|---|---|---|
+| Pay in Full | $2,000 once | + $30/mo care (Done With You) or $75/mo (Done For You) |
+| Monthly Plan | $0 down | $150/mo (Done With You) or $300/mo (Done For You), starting the month after launch |
+
+*Done With You:* you make your own edits any time through your admin dashboard. *Done For You:* we
+make the changes for you. Both include fast, secure hosting with SSL, software and security updates,
+and automatic backups. Monthly Plan: cancel anytime with 30 days' notice.
+
+**Add-ons**
+
 | Item | Type | Price |
 |---|---|---|
-| Website design & build | One-time | {website_build} |
-| Hosting & maintenance | Monthly | {hosting} |
 | AI assistant setup (Options 2 and 3) | One-time | {ai_setup} |
 | AI assistant (Options 2 and 3) | Monthly | {ai_monthly} |
-| Ads management (Option 3) | Monthly | {ads_mgmt} |
-| Ad budget, paid directly to Meta/Google (Option 3) | Monthly | {ads_budget} suggested |
+| Meta ads management (Option 3) | Monthly | {ads_mgmt} |
+| Ad budget, paid directly to Meta (Option 3) | Monthly | {ads_budget} suggested |
 
-The monthly hosting covers secure hosting, an SSL certificate, software and security updates,
-uptime monitoring, and small content edits as your business changes.
+**Our promises**
+- You see and approve the design before launch. We revise until it's right.
+- 14-day money-back guarantee. No fine print.
+- You own your website and your domain, free and clear. No lock-in, ever.
 
 ## Recent Work
+- **White's Crossing Cattle** (wxcattle.com): custom website
+- **WillCo Land LLC** (willcolandllc.com): custom website
 - **Overstreet & Associates Engineering** (Biloxi): website
 - **Fitness Depot** (gyms): AI customer response system and AI email assistant
-- **White's Crossing Cattle Co.** (Wiggins): website
-- **Wilco Land Management**: website
 - **Rescued Child Clothing**: website
 - **What Is Water?** (whatiswaterbook.com): book website with reader sign-ups
 
-## Next Steps
-1. Reply with the option you'd like, or any changes you want.
-2. The one-time fees are due upfront before work begins.
-3. We gather your content (logo, photos, services, prices) and set a start date.
-4. Red Ocean builds everything and shares it with you for review.
-5. After your approval, we launch, and the monthly plan begins.
+> "I had been putting off creating a website for far too long. I knew I needed one but had no idea
+> where to begin. Tyler made it super easy. We were up and running in no time, and I have had lots
+> of favorable feedback. I should have done this much sooner."
+> **Jeff White, White's Crossing Cattle**
 
-We're excited to work with you. Call or text with any questions: 601-528-1659.
+## Next Steps
+1. Reply with the option and plan you'd like, or any changes you want.
+2. Start your build at goredocean.com/start. We kick off within one business day.
+3. We gather your content (logo, photos, services, prices) and design your site for your approval.
+4. Most sites launch about two weeks after kickoff.
+
+Questions? Call or text 601-528-1659, or email tyler@goredocean.com.
 
 Tyler Eggers
-Red Ocean
+Red Ocean · Wiggins, Mississippi
 """
 
 

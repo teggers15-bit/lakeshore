@@ -16,13 +16,14 @@ Each lead gets one of these angles:
 SENDER_NAME = "Tyler Eggers"
 SENDER_PHONE = "601-528-1659"
 # CAN-SPAM requires a valid physical postal address in every commercial email.
-MAILING_ADDRESS = "[MAILING ADDRESS NEEDED]"
+MAILING_ADDRESS = "1800 Woodland Drive, Wiggins, MS 39577"
+WEBSITE = "goredocean.com"
 
 # --- per-industry wording -------------------------------------------------
 
 GROUPS = {
     "trades": {
-        "proof": "Overstreet & Associates Engineering in Biloxi and Wilco Land Management",
+        "proof": "Overstreet & Associates Engineering in Biloxi and WillCo Land",
         "match": ["contractor", "roof", "plumb", "hvac", "air condition", "heating",
                   "landscap", "lawn", "pressure wash", "power wash", "clean",
                   "tow", "auto repair", "mechanic", "tire", "detail", "car wash",
@@ -41,7 +42,7 @@ GROUPS = {
         "ai": "an AI assistant that books appointments by text or phone 24/7, even when your hands are full",
     },
     "food": {
-        "proof": "Rescued Child Clothing and Fitness Depot (we built their AI customer response system)",
+        "proof": "White's Crossing Cattle and Fitness Depot (we built their AI customer response system)",
         "match": ["restaurant", "bakery", "cafe", "coffee", "grill", "bar", "food",
                   "pizza", "seafood", "bbq", "barbecue", "diner", "kitchen", "donut",
                   "taco", "mexican", "chinese", "sushi", "catering", "deli", "dessert",
@@ -52,7 +53,7 @@ GROUPS = {
         "ai": "an AI assistant that answers the phone for hours, menu questions, and catering orders",
     },
     "retail": {
-        "proof": "Rescued Child Clothing and Fitness Depot (we built their AI customer response system)",
+        "proof": "White's Crossing Cattle and Fitness Depot (we built their AI customer response system)",
         "match": ["boutique", "store", "shop", "clothing", "gift", "jewel", "florist"],
         "noun": "shop",
         "look_for": "what you carry, your hours, and what's new",
@@ -127,7 +128,7 @@ def site_observation(psi: dict | None, final_url: str | None) -> str | None:
 
 def signature() -> str:
     return (
-        f"Thanks,\n{SENDER_NAME}\nRed Ocean\n{SENDER_PHONE}\n\n"
+        f"Thanks,\n{SENDER_NAME}\nRed Ocean\n{SENDER_PHONE} · {WEBSITE}\n\n"
         f"P.S. If this isn't something you need, just reply \"no thanks\" and I won't reach out again.\n\n"
         f"Red Ocean LLC · {MAILING_ADDRESS}"
     )
@@ -136,10 +137,10 @@ def signature() -> str:
 OFFER = ("Would it help if I put together a free homepage mockup for {name}? "
          "No cost and no obligation. If you like it, we can talk from there.")
 
-WHO = ("I'm Tyler with Red Ocean, here on the Coast. We do websites, AI tools, and Facebook and Google "
-       "ads for small businesses like {proof}. For you, that could include {ai}.")
+WHO = ("I'm Tyler with Red Ocean, here on the Coast. We do websites, AI tools, and Facebook and "
+       "Instagram ads for small businesses like {proof}. For you, that could include {ai}.")
 WHO_REBUILD = ("I'm Tyler with Red Ocean, here on the Coast. We do fast, mobile-friendly websites, AI tools, "
-               "and Facebook and Google ads for small businesses like {proof}. For you, that could include {ai}.")
+               "and Facebook and Instagram ads for small businesses like {proof}. For you, that could include {ai}.")
 
 
 def clean_name(raw: str) -> str:
