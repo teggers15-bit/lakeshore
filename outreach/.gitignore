@@ -1,0 +1,5 @@
+# Lead data stays out of this public repo (copies live in Google Drive).
+*.csv
+*.json
+raw/
+__pycache__/
