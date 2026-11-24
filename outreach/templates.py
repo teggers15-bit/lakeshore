@@ -42,7 +42,7 @@ GROUPS = {
         "ai": "an AI assistant that books appointments by text or phone 24/7, even when your hands are full",
     },
     "food": {
-        "proof": "White's Crossing Cattle and Fitness Depot (we built their AI customer response system)",
+        "proof": "Rescued Child Clothing Co. and Fitness Depot (we built their AI customer response system)",
         "match": ["restaurant", "bakery", "cafe", "coffee", "grill", "bar", "food",
                   "pizza", "seafood", "bbq", "barbecue", "diner", "kitchen", "donut",
                   "taco", "mexican", "chinese", "sushi", "catering", "deli", "dessert",
@@ -53,7 +53,7 @@ GROUPS = {
         "ai": "an AI assistant that answers the phone for hours, menu questions, and catering orders",
     },
     "retail": {
-        "proof": "White's Crossing Cattle and Fitness Depot (we built their AI customer response system)",
+        "proof": "Rescued Child Clothing Co. and Fitness Depot (we built their AI customer response system)",
         "match": ["boutique", "store", "shop", "clothing", "gift", "jewel", "florist"],
         "noun": "shop",
         "look_for": "what you carry, your hours, and what's new",

@@ -96,7 +96,7 @@ and automatic backups. Monthly Plan: cancel anytime with 30 days' notice.
 - **WillCo Land LLC** (willcolandllc.com): custom website
 - **Overstreet & Associates Engineering** (Biloxi): website
 - **Fitness Depot** (gyms): AI customer response system and AI email assistant
-- **Rescued Child Clothing**: website
+- **Rescued Child Clothing Co.** (rescuedchildclothing.com): online apparel store
 - **What Is Water?** (whatiswaterbook.com): book website with reader sign-ups
 
 > "I had been putting off creating a website for far too long. I knew I needed one but had no idea
