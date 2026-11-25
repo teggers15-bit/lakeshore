@@ -47,7 +47,7 @@ GROUPS = {
                   "pizza", "seafood", "bbq", "barbecue", "diner", "kitchen", "donut",
                   "taco", "mexican", "chinese", "sushi", "catering", "deli", "dessert",
                   "cake", "sandwich", "burger", "wings", "steak", "po' boy", "thai",
-                  "vietnamese", "japanese", "italian", "american"],
+                  "vietnamese", "japanese", "italian", "american", "bubble tea", "boba", "tea house"],
         "noun": "place",
         "look_for": "your menu, hours, and photos of the food",
         "ai": "an AI assistant that answers the phone for hours, menu questions, and catering orders",
